@@ -8,8 +8,7 @@ from third_party.linkedin_lookup_agent import person_lookup
 
 load_dotenv()
 
-if __name__ == "__main__":
-
+def main(name: str) -> str:
      summary_template = """
           given the Linkedin information {information} about a person from I want you to create:
           1. a short summary
@@ -21,7 +20,7 @@ if __name__ == "__main__":
      llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")
 
      chain = LLMChain(llm=llm, prompt=summary_prompt_template)
-     linkedin_profile_url = person_lookup(person_name="Monish Soundar Raj")
+     linkedin_profile_url = person_lookup(person_name=name)
      linkedin_data = scarpe_linkedin(Linkedin_url=linkedin_profile_url)
 
      data_dict=linkedin_data.json()
@@ -34,4 +33,12 @@ if __name__ == "__main__":
      data_dict_copy.pop("people_also_viewed")
      data_dict_copy.pop("certifications")
                
-     print(chain.run(information=linkedin_data))
+     result = chain.run(information=linkedin_data)
+     
+     return result
+
+if __name__ == "__main__":
+     result = main("Aniket Tiwari UNCC")
+     print(result)
+
+  
