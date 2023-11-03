@@ -38,7 +38,5 @@ def main(name: str) -> str:
      return result
 
 if __name__ == "__main__":
-     result = main("Aniket Tiwari UNCC")
+     result = main("Monish Soundar Raj UNCC")
      print(result)
-
-  
